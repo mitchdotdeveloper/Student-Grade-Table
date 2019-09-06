@@ -221,7 +221,11 @@ class SGT_template {
 		true if it updated, false if it did not
 		ESTIMATED TIME: no needed for first versions: 30 minutes
 	*/
-	updateStudent() {
-
+	updateStudent (id, field, value) {
+    if (this.doesStudentExist(id)) {
+      this.data[id].update(field, value);
+      return true;
+    }
+    return false;
 	}
 }
