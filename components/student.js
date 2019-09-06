@@ -44,7 +44,7 @@ class Student {
 	ESTIMATED TIME: 30 minutes
 	*/
 	getData() {
-
+    return this.data;
 	}
 
 	/* render - create and return a table row (TR) with 4 table cells (TD) in them:
