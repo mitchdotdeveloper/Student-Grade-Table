@@ -14,6 +14,7 @@ class SGT_template {
 
     this.handleAdd = this.handleAdd.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.deleteStudent = this.deleteStudent.bind(this);
 	}
 
 	/* addEventHandlers - add event handlers to pre-made dom elements
@@ -70,8 +71,25 @@ class SGT_template {
 	return: false if unsuccessful in adding student, true if successful
 	ESTIMATED TIME: 1.5 hours
 	*/
-	createStudent() {
+	createStudent (name, course, grade, id) {
+    if (this.doesStudentExist(id)) {
+      return false;
+    }
 
+    if (id < 0 || !id) {
+      var idKeys = Object.keys(this.data);
+      for (var index = 0; index < idKeys.length; ++index) {
+        if (parseInt(idKeys[index])+1 !== parseInt(idKeys[index+1])) {
+          id = parseInt(idKeys[index])+1;
+          break;
+        }
+      }
+    }
+
+    console.log(id);
+
+    this.data[id] = new Student(id, name, course, grade, this.deleteStudent);
+    return true;
 	}
 
 	/* doesStudentExist -
@@ -83,8 +101,8 @@ class SGT_template {
 	return: false if id is undefined or that student doesn't exist, true if the student does exist
 	ESTIMATED TIME: 15 minutes
 	*/
-	doesStudentExist() {
-
+	doesStudentExist (id) {
+    return this.data.hasOwnProperty(id);
 	}
 
 	/* handleAdd - function to handle the add button click
@@ -98,7 +116,10 @@ class SGT_template {
 	ESTIMATED TIME: 1 hour
 	*/
 	handleAdd() {
-
+    this.createStudent(this.elementConfig.nameInput.val(),
+                       this.elementConfig.courseInput.val(),
+                       this.elementConfig.gradeInput.val());
+    this.clearInputs();
 	}
 
 	/* readStudent -
