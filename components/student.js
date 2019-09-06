@@ -109,7 +109,18 @@ class Student {
 	return: (boolean) true if it was changed, false if it was not
 	ESTIMATED TIME: 1.5 hours
 	*/
-	update() {
+	update (field, value) {
+    if (!this.data.hasOwnProperty(field)) {
+      return false;
+    }
 
+    if (field === 'grade') {
+      value = parseInt(value);
+    }
+
+    this.data[field] = value;
+    this.domElements[field].text(value);
+
+    return true;
 	}
 }
