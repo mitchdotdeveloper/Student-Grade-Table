@@ -224,6 +224,8 @@ class SGT_template {
 	updateStudent (id, field, value) {
     if (this.doesStudentExist(id)) {
       this.data[id].update(field, value);
+      return true;
     }
+    return false;
 	}
 }
