@@ -8,11 +8,12 @@ class SGT_template {
 		- Finally, binds methods that need to be bound
 	return: undefined
 	*/
-	constructor(elementConfig) {
-		this.elementConfig = elementConfig; /* console.log elementConfig to note what data you have access to */
+	constructor (elementConfig) {
+		this.elementConfig = elementConfig;
 		this.data = {};
 
-
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
 	}
 
 	/* addEventHandlers - add event handlers to pre-made dom elements
@@ -23,9 +24,9 @@ class SGT_template {
 	return: undefined
 	ESTIMATED TIME: 15 minutes
 	*/
-	addEventHandlers() {
-
-
+	addEventHandlers () {
+    $(this.elementConfig.addButton).on('click', this.handleAdd);
+    $(this.elementConfig.cancelButton).on('click', this.handleCancel);
 	}
 
 	/* clearInputs - Clear the values in the three form inputs
