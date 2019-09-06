@@ -25,8 +25,8 @@ class SGT_template {
 	ESTIMATED TIME: 15 minutes
 	*/
 	addEventHandlers () {
-    $(this.elementConfig.addButton).on('click', this.handleAdd);
-    $(this.elementConfig.cancelButton).on('click', this.handleCancel);
+    this.elementConfig.addButton.on('click', this.handleAdd);
+    this.elementConfig.cancelButton.on('click', this.handleCancel);
 	}
 
 	/* clearInputs - Clear the values in the three form inputs
@@ -35,7 +35,9 @@ class SGT_template {
 	ESTIMATED TIME: 15 minutes
 	*/
 	clearInputs() {
-
+    this.elementConfig.nameInput.val('');
+    this.elementConfig.courseInput.val('');
+    this.elementConfig.gradeInput.val('');
 	}
 
 	/* handleCancel - function to handle the cancel button press (should clear out all values in the inputs)
@@ -44,7 +46,7 @@ class SGT_template {
 	ESTIMATED TIME: 15 minutes
 	*/
 	handleCancel() {
-
+    this.clearInputs();
 	}
 
 	/* createStudent - take in data for a student, make a new Student object, and add it to this.data object
