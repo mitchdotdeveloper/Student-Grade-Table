@@ -65,7 +65,20 @@ class Student {
 	ESTIMATED TIME: 2 hours
 	*/
 	render() {
+    this.domElements.row = $('<tr>');
+    this.domElements.name = $('<td>').text(this.data.name);
+    this.domElements.course = $('<td>').text(this.data.course);
+    this.domElements.grade = $('<td>').text(this.data.grade);
+    this.domElements.operations = $('<td>');
+    this.domElements.deleteButton = $('<button>').text('delete');
 
+    $(this.domElements.deleteButton).on('click', this.deleteCallback);
+
+    this.domElements.operations.append(this.domElements.deleteButton);
+    this.domElements.row.append(this.domElements.name, this.domElements.course,
+                                this.domElements.grade, this.domElements.operations);
+
+    return this.domElements.row;
 	}
 
 	/* handleDelete - call the SGT_template delete callback, and remove this student's dom element
