@@ -134,8 +134,13 @@ class SGT_template {
 		a singular Student object if an ID was given, an array of Student objects if no ID was given
 		ESTIMATED TIME: 45 minutes
 	*/
-	readStudent() {
-
+	readStudent (id) {
+    if (arguments.length === 0) {
+      return Object.values(this.data);
+    } else if (this.data.hasOwnProperty(id)) {
+      return this.data[id];
+    }
+    return false;
 	}
 
 	/* displayAllStudents - iterate through all students in the this.data object
