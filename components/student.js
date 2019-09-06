@@ -13,7 +13,7 @@ class Student {
 	return: undefined (don't return undefined, it will screw it up a constructor, ***don't put a return***)
 	ESTIMATED TIME: 30 minutes to understand
 	*/
-	constructor(id, name, course, grade, deleteCallback = () => { }) {
+	constructor (id, name, course, grade, deleteCallback = () => { }) {
 		//this method has been built out to help you understand the general structure better
 		this.data = {
 			id: id,
@@ -43,8 +43,8 @@ class Student {
 		(number): grade
 	ESTIMATED TIME: 30 minutes
 	*/
-	getData() {
-
+	getData () {
+    return this.data;
 	}
 
 	/* render - create and return a table row (TR) with 4 table cells (TD) in them:
@@ -64,8 +64,21 @@ class Student {
 	return: (jquery dom element) the row that contains the student dom elements
 	ESTIMATED TIME: 2 hours
 	*/
-	render() {
+	render () {
+    this.domElements.row = $('<tr>');
+    this.domElements.name = $('<td>').text(this.data.name);
+    this.domElements.course = $('<td>').text(this.data.course);
+    this.domElements.grade = $('<td>').text(this.data.grade);
+    this.domElements.operations = $('<td>');
+    this.domElements.deleteButton = $('<button>').text('delete');
 
+    $(this.domElements.deleteButton).on('click', this.handleDelete);
+
+    this.domElements.operations.append(this.domElements.deleteButton);
+    this.domElements.row.append(this.domElements.name, this.domElements.course,
+                                this.domElements.grade, this.domElements.operations);
+
+    return this.domElements.row;
 	}
 
 	/* handleDelete - call the SGT_template delete callback, and remove this student's dom element
@@ -75,8 +88,9 @@ class Student {
 		reference you stored in this.domElements)
 	ESTIMATED TIME: 15 minutes
 	*/
-	handleDelete() {
-
+	handleDelete () {
+    this.deleteCallback(this.data.id);
+    this.domElements.row.remove();
 	}
 
 	/* update - change a value in the student record
@@ -95,7 +109,18 @@ class Student {
 	return: (boolean) true if it was changed, false if it was not
 	ESTIMATED TIME: 1.5 hours
 	*/
-	update() {
+	update (field, value) {
+    if (!this.data.hasOwnProperty(field)) {
+      return false;
+    }
 
+    if (field === 'grade') {
+      value = parseInt(value);
+    }
+
+    this.data[field] = value;
+    this.domElements[field].text(value);
+
+    return true;
 	}
 }
