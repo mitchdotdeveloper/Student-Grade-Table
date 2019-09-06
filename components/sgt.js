@@ -197,8 +197,12 @@ class SGT_template {
 		true if it was successful, false if not
 		ESTIMATED TIME: 30 minutes
 	*/
-	deleteStudent() {
-
+	deleteStudent (id) {
+    if (this.doesStudentExist(id)) {
+      delete this.data[id];
+      return true;
+    }
+    return false;
 	}
 
 	/* updateStudent -
