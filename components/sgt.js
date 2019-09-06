@@ -86,8 +86,6 @@ class SGT_template {
       }
     }
 
-    console.log(id);
-
     this.data[id] = new Student(id, name, course, grade, this.deleteStudent);
     return true;
 	}
@@ -120,6 +118,7 @@ class SGT_template {
                        this.elementConfig.courseInput.val(),
                        this.elementConfig.gradeInput.val());
     this.clearInputs();
+    this.displayAllStudents();
 	}
 
 	/* readStudent -
@@ -155,8 +154,13 @@ class SGT_template {
 	return: undefined
 	ESTIMATED TIME: 1.5 hours
 	*/
-	displayAllStudents() {
-
+	displayAllStudents () {
+    this.elementConfig.displayArea.empty();
+    for (var student in this.data) {
+      var studentElement = this.data[student].render();
+      this.elementConfig.displayArea.append(studentElement);
+    }
+    this.displayAverage();
 	}
 
 	/* displayAverage - get the grade average and display it
@@ -168,8 +172,16 @@ class SGT_template {
 	ESTIMATED TIME: 15 minutes
 	*/
 
-	displayAverage() {
+	displayAverage () {
+    var average = null;
+    var students = null;
+    for (var student in this.data) {
+      average += this.data[student].data.grade;
+      ++students;
+    }
+    average /= students;
 
+    this.elementConfig.averageArea.text(average.toFixed(2));
 	}
 
 	/* deleteStudent -
