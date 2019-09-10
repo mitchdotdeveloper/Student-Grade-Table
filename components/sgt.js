@@ -14,7 +14,7 @@ class SGT_template {
 
     this.handleAdd = this.handleAdd.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
-    this.deleteStudent = this.deleteStudent.bind(this);
+    this.removeStudent = this.removeStudent.bind(this);
     this.retrieveStudent = this.retrieveStudent.bind(this);
 	}
 
@@ -88,7 +88,7 @@ class SGT_template {
       }
     }
 
-    this.data[id] = new Student(id, name, course, grade, this.deleteStudent);
+    this.data[id] = new Student(id, name, course, grade, this.removeStudent);
     return true;
 	}
 
@@ -127,7 +127,6 @@ class SGT_template {
                             parseInt(this.elementConfig.gradeInput.val()));
 
     this.clearInputs();
-    // this.displayAllStudents();
   }
 
   addStudentToServer(name, course, grade) {
@@ -145,7 +144,7 @@ class SGT_template {
       },
       success: function (response) {
         localThis.createStudent(name, course, grade, response.new_id);
-        localThis.retrieveStudent;
+        localThis.retrieveStudent();
       },
       error: function (response) {
         console.error(response);
@@ -231,12 +230,30 @@ class SGT_template {
 		true if it was successful, false if not
 		ESTIMATED TIME: 30 minutes
 	*/
-	deleteStudent (id) {
+	removeStudent (id) {
     if (this.doesStudentExist(id)) {
       delete this.data[id];
-      return true;
     }
-    return false;
+
+    var localThis = this;
+    var ajaxConfigObject = {
+      dataType: 'JSON',
+      url: 'http://s-apis.learningfuze.com/sgt/delete',
+      method: 'POST',
+      data: {
+        api_key: '9N6jd2RHMSkr',
+        student_id: id
+      },
+      success: function (response) {
+        localThis.retrieveStudent();
+      },
+      error: function (response) {
+        console.error(response);
+      }
+    };
+
+    $.ajax(ajaxConfigObject);
+
 	}
 
 	/* updateStudent -
