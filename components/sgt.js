@@ -10,11 +10,13 @@ class SGT_template {
 	*/
 	constructor (elementConfig) {
 		this.elementConfig = elementConfig;
+    console.log(elementConfig)
 		this.data = {};
 
     this.handleAdd = this.handleAdd.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
     this.deleteStudent = this.deleteStudent.bind(this);
+    this.retrieveStudent = this.retrieveStudent.bind(this);
 	}
 
 	/* addEventHandlers - add event handlers to pre-made dom elements
@@ -28,6 +30,7 @@ class SGT_template {
 	addEventHandlers () {
     this.elementConfig.addButton.on('click', this.handleAdd);
     this.elementConfig.cancelButton.on('click', this.handleCancel);
+    $('#retrieveButton').on('click', this.retrieveStudent);
 	}
 
 	/* clearInputs - Clear the values in the three form inputs
@@ -238,5 +241,7 @@ class SGT_template {
       - A boolean on whether the server request was successful
       - The student data if the request was successful
   */
-  retrieveStudent ()
+  retrieveStudent () {
+    console.log('hi');
+  }
 }
