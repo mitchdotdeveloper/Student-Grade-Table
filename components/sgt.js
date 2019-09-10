@@ -121,17 +121,13 @@ class SGT_template {
       isNaN(parseInt(this.elementConfig.gradeInput.val()))) {
       return;
     }
-    // this.createStudent(this.elementConfig.nameInput.val(),
-    //                    this.elementConfig.courseInput.val(),
-    //                    this.elementConfig.gradeInput.val());
 
     this.addStudentToServer(this.elementConfig.nameInput.val(),
                             this.elementConfig.courseInput.val(),
                             parseInt(this.elementConfig.gradeInput.val()));
 
-
     this.clearInputs();
-    this.displayAllStudents();
+    // this.displayAllStudents();
   }
 
   addStudentToServer(name, course, grade) {
@@ -148,7 +144,7 @@ class SGT_template {
         grade: grade
       },
       success: function (response) {
-        // localThis.createStudent(name, course, grade, response.new_id);
+        localThis.createStudent(name, course, grade, response.new_id);
         localThis.retrieveStudent;
       },
       error: function (response) {
