@@ -10,7 +10,6 @@ class SGT_template {
 	*/
 	constructor (elementConfig) {
 		this.elementConfig = elementConfig;
-    console.log(elementConfig)
 		this.data = {};
 
     this.handleAdd = this.handleAdd.bind(this);
@@ -241,19 +240,29 @@ class SGT_template {
       - A boolean on whether the server request was successful
       - The student data if the request was successful
   */
-
   retrieveStudent () {
+    var localThis = this;
     var ajaxConfigObject = {
-      datatype: 'JSON',
-      'url': 'http://s-apis.learningfuze.com/sgt/get',
-      'method': 'POST',
-      'data': {
-        'api_key': '9N6jd2RHMSkr'
+      dataType: 'JSON',
+      url: 'http://s-apis.learningfuze.com/sgt/get',
+      method: 'POST',
+      data: {
+        api_key: '9N6jd2RHMSkr'
+      },
+      success: function (response) {
+        var studentCount = 0;
+        while (studentCount < response.data.length) {
+          var student = response.data[studentCount];
+          localThis.createStudent(student.name, student.course, student.grade, student.id);
+          ++studentCount;
+        }
+        localThis.displayAllStudents();
+      },
+      error : function (response) {
+        console.error(response);
       }
-    }
+    };
 
-    $.ajax(ajaxConfigObject).done(function (response) {
-      console.log(JSON.parse(response));
-    });
+    $.ajax(ajaxConfigObject);
   }
 }
