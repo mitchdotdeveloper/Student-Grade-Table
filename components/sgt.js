@@ -241,7 +241,19 @@ class SGT_template {
       - A boolean on whether the server request was successful
       - The student data if the request was successful
   */
+
   retrieveStudent () {
-    console.log('hi');
+    var ajaxConfigObject = {
+      datatype: 'JSON',
+      'url': 'http://s-apis.learningfuze.com/sgt/get',
+      'method': 'POST',
+      'data': {
+        'api_key': '9N6jd2RHMSkr'
+      }
+    }
+
+    $.ajax(ajaxConfigObject).done(function (response) {
+      console.log(JSON.parse(response));
+    });
   }
 }
