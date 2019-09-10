@@ -206,7 +206,6 @@ class SGT_template {
 	}
 
 	/* updateStudent -
-		*** not used for now.  Will be used later ***
 		pass in an ID, a field to change, and a value to change the field to
 	purpose:
 		- finds the necessary student by the given id
@@ -228,4 +227,16 @@ class SGT_template {
     }
     return false;
 	}
+
+  /* retrieveStudent -
+    retrieve the student data from the server
+  purpose:
+  - send the API key to the server
+  params: none
+  return:
+    An object literal containing:
+      - A boolean on whether the server request was successful
+      - The student data if the request was successful
+  */
+  retrieveStudent ()
 }
