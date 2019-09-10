@@ -115,13 +115,49 @@ class SGT_template {
 	return: undefined
 	ESTIMATED TIME: 1 hour
 	*/
-	handleAdd() {
-    this.createStudent(this.elementConfig.nameInput.val(),
-                       this.elementConfig.courseInput.val(),
-                       this.elementConfig.gradeInput.val());
+  handleAdd() {
+    if (this.elementConfig.nameInput.val().length < 2 ||
+      this.elementConfig.courseInput.val().length < 2 ||
+      isNaN(parseInt(this.elementConfig.gradeInput.val()))) {
+      return;
+    }
+    // this.createStudent(this.elementConfig.nameInput.val(),
+    //                    this.elementConfig.courseInput.val(),
+    //                    this.elementConfig.gradeInput.val());
+
+    this.addStudentToServer(this.elementConfig.nameInput.val(),
+                            this.elementConfig.courseInput.val(),
+                            parseInt(this.elementConfig.gradeInput.val()));
+
+
     this.clearInputs();
     this.displayAllStudents();
-	}
+  }
+
+  addStudentToServer(name, course, grade) {
+    var localThis = this;
+
+    var ajaxConfigObject = {
+      dataType: 'JSON',
+      url: 'http://s-apis.learningfuze.com/sgt/create',
+      method: 'POST',
+      data: {
+        api_key: '9N6jd2RHMSkr',
+        name: name,
+        course: course,
+        grade: grade
+      },
+      success: function (response) {
+        // localThis.createStudent(name, course, grade, response.new_id);
+        localThis.retrieveStudent;
+      },
+      error: function (response) {
+        console.error(response);
+      }
+    };
+
+    $.ajax(ajaxConfigObject);
+  }
 
 	/* readStudent -
 		get the data for one or all students
