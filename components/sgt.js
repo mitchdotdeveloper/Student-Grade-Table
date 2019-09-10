@@ -15,6 +15,7 @@ class SGT_template {
     this.handleAdd = this.handleAdd.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
     this.deleteStudent = this.deleteStudent.bind(this);
+    this.retrieveStudent = this.retrieveStudent.bind(this);
 	}
 
 	/* addEventHandlers - add event handlers to pre-made dom elements
@@ -28,6 +29,7 @@ class SGT_template {
 	addEventHandlers () {
     this.elementConfig.addButton.on('click', this.handleAdd);
     this.elementConfig.cancelButton.on('click', this.handleCancel);
+    $('#retrieveButton').on('click', this.retrieveStudent);
 	}
 
 	/* clearInputs - Clear the values in the three form inputs
@@ -206,7 +208,6 @@ class SGT_template {
 	}
 
 	/* updateStudent -
-		*** not used for now.  Will be used later ***
 		pass in an ID, a field to change, and a value to change the field to
 	purpose:
 		- finds the necessary student by the given id
@@ -228,4 +229,40 @@ class SGT_template {
     }
     return false;
 	}
+
+  /* retrieveStudent -
+    retrieve the student data from the server
+  purpose:
+  - send the API key to the server
+  params: none
+  return:
+    An object literal containing:
+      - A boolean on whether the server request was successful
+      - The student data if the request was successful
+  */
+  retrieveStudent () {
+    var localThis = this;
+    var ajaxConfigObject = {
+      dataType: 'JSON',
+      url: 'http://s-apis.learningfuze.com/sgt/get',
+      method: 'POST',
+      data: {
+        api_key: '9N6jd2RHMSkr'
+      },
+      success: function (response) {
+        var studentCount = 0;
+        while (studentCount < response.data.length) {
+          var student = response.data[studentCount];
+          localThis.createStudent(student.name, student.course, student.grade, student.id);
+          ++studentCount;
+        }
+        localThis.displayAllStudents();
+      },
+      error : function (response) {
+        console.error(response);
+      }
+    };
+
+    $.ajax(ajaxConfigObject);
+  }
 }
