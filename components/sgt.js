@@ -134,7 +134,7 @@ class SGT_template {
 
     var ajaxConfigObject = {
       dataType: 'JSON',
-      url: 'http://s-apis.learningfuze.com/sgt/create',
+      url: 'api/addstudent.php',
       method: 'POST',
       data: {
         api_key: '9N6jd2RHMSkr',
@@ -293,7 +293,6 @@ class SGT_template {
     var localThis = this;
     var ajaxConfigObject = {
       dataType: 'JSON',
-      // url: 'http://s-apis.learningfuze.com/sgt/get',
       url: 'api/getgrades.php',
       method: 'POST',
       data: {
