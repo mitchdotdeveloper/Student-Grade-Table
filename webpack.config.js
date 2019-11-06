@@ -29,13 +29,17 @@ module.exports = {
   },
   devtool: 'source-map',
   devServer: {
-    host: '0.0.0.0',
-    port: 3000,
+    host: 'localhost',
+    port: 4000,
     contentBase: publicPath,
     watchContentBase: true,
     stats: 'minimal',
     proxy: {
-      '/api': 'http://localhost:3001'
+      '/api': 'http://localhost:4001'
+      //'/api': {
+      //  target: 'http://localhost:4001',
+      //  pathRewrite: {'^/api' : ''}
+      //}
     }
   }
 };
