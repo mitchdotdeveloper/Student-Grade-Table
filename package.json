@@ -5,9 +5,9 @@
   "main": "server/index.js",
   "scripts": {
     "client": "webpack-dev-server",
-    "server": "node server/server.js",
+    "server": "node -r dotenv/config server/server.js",
     "build": "webpack --mode=production",
-    "dev": "npm run server && npm run client"
+    "dev": "npm run client && npm run server"
   },
   "dependencies": {
     "express": "^4.17.1",

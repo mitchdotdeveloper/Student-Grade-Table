@@ -1,2 +1,3 @@
 node_modules
 /server/databaseConnection.js
+/server/.env
