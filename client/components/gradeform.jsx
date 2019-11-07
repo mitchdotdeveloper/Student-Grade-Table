@@ -11,21 +11,15 @@ export default class GradeForm extends React.Component {
       btnText: 'Add'
     };
 
-    this.handleNameInputChange = this.handleNameInputChange.bind(this);
-    this.handleCourseInputChange = this.handleCourseInputChange.bind(this);
-    this.handleGradeInputChange = this.handleGradeInputChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.submitForm = this.submitForm.bind(this);
     this.cancelForm = this.cancelForm.bind(this);
   }
 
-  handleNameInputChange(e) {
-    this.setState({ name: e.currentTarget.value });
-  }
-  handleCourseInputChange(e) {
-    this.setState({ course: e.currentTarget.value });
-  }
-  handleGradeInputChange(e) {
-    this.setState({ grade: e.currentTarget.value });
+  handleInputChange({ target: { name, value } }) {
+    let student = { ...this.state };
+    student[name] = value;
+    this.setState(student);
   }
 
   componentDidUpdate(prevProps) {
@@ -87,9 +81,10 @@ export default class GradeForm extends React.Component {
           <input
             type="text"
             className="form-control"
+            name="name"
             placeholder="Student Name"
             value={this.state.name}
-            onChange={this.handleNameInputChange}
+            onChange={this.handleInputChange}
             required
           />
         </div>
@@ -100,9 +95,10 @@ export default class GradeForm extends React.Component {
           <input
             type="text"
             className="form-control"
+            name="course"
             placeholder="Student Course"
             value={this.state.course}
-            onChange={this.handleCourseInputChange}
+            onChange={this.handleInputChange}
             required
           />
         </div>
@@ -113,9 +109,12 @@ export default class GradeForm extends React.Component {
           <input
             type="number"
             className="form-control"
+            name="grade"
             placeholder="Student Grade"
             value={this.state.grade}
-            onChange={this.handleGradeInputChange}
+            onChange={this.handleInputChange}
+            min="0"
+            max="110"
             required
           />
         </div>

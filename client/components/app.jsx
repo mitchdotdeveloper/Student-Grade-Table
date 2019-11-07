@@ -57,6 +57,7 @@ class App extends React.Component {
   setStudent(student) {
     this.setState({ student: student });
   }
+
   updateStudent(student) {
     if (student) {
       student.grade = parseFloat(student.grade);
