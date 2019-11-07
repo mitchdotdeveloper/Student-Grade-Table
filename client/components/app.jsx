@@ -60,7 +60,7 @@ class App extends React.Component {
   updateStudent(student) {
     if (student) {
       student.grade = parseFloat(student.grade);
-      fetch(`/api/grades/${student.id}`, {
+      fetch(`/api/grades`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(student)
