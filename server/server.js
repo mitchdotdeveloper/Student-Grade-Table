@@ -3,10 +3,10 @@ const express = require('express');
 const server = express();
 
 server.get('/api/grades', (req, res) => {
-  let query = "SELECT (`student_name`, `student_course`, `student_grade`) FROM `grades`";
+  let query = "SELECT `student_name` AS 'name', `student_course`, `student_grade` FROM `grades`";
   connection.query(query, (error, results, fields) => {
     if (error) throw error;
-    console.log(results);
+    console.log(results[0].name);
   });
 });
 

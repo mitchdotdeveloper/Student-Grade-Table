@@ -36,10 +36,6 @@ module.exports = {
     stats: 'minimal',
     proxy: {
       '/api': 'http://localhost:3001'
-      //'/api': {
-      //  target: 'http://localhost:4001',
-      //  pathRewrite: {'^/api' : ''}
-      //}
     }
   }
 };
