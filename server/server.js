@@ -43,11 +43,10 @@ server.delete('/api/grades/:id', (req, res) => {
 });
 
 server.put('/api/grades', (req, res) => {
-  let query = "UPDATE `grades` SET ";
-  query += "`student_name` = '" + req.body.name + "', ";
-  query += "`student_course` = '" + req.body.course + "', ";
-  query += "`student_grade` = " + req.body.grade;
-  query += " WHERE `id` = " + req.body.id;
+  let query = "UPDATE `grades` SET "+
+              "`student_name` = ?, `student_course` = ?, `student_grade` = ? "+
+              "WHERE `id` = ?";
+  query = connection.format(query, [req.body.name, req.body.course, req.body.grade, req.body.id]);
   connection.query(query, () => {
     res.send({
       id: req.body.id,
