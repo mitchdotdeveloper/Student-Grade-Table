@@ -6,7 +6,7 @@ const connection = mysql.createConnection({
   database: process.env.DB
 });
 
-connection.query('SELECT 1', (error, results, fields) => {
+connection.query('SELECT 1', error => {
   if ( error ) throw error;
  });
 

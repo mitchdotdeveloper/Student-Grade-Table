@@ -36,9 +36,10 @@ server.post('/api/grades', (req, res) => {
 
 });
 
-// server.delete('/api/grades', (req, res) => {
-
-// });
+server.delete('/api/grades/:id', (req, res) => {
+  let query = "DELETE FROM `grades` WHERE `id` = " + req.params.id;
+  connection.query(query, () => res.send());
+});
 
 // server.put('/api/grades', (req, res) => {
 
