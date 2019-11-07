@@ -22,8 +22,9 @@ server.get('/api/grades', (req, res) => {
 });
 
 server.post('/api/grades', (req, res) => {
-  let query = "INSERT INTO `grades` (`student_name`, `student_course`, `student_grade`) ";
-  query += `VALUES ('${req.body.name}', '${req.body.course}', ${req.body.grade})`;
+  let query = "INSERT INTO `grades` (`student_name`, `student_course`, `student_grade`) "+
+              "VALUES (?, ?, ?)";
+  query = connection.format(query, [req.body.name, req.body.course, req.body.grade])
   connection.query(query, (error, result) => {
     if ( error ) throw error;
     res.send({
