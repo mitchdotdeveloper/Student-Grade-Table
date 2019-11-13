@@ -28,32 +28,3 @@ Try the application live at [http://student-grade-table.mitchdev.xyz](http://stu
 ## Preview
 
 ![Student-Grade-Table](Student-Grade-Table.gif)
-
-## Development
-
-#### System Requirements
-
-- Node.js 10 or higher
-- NPM 6 or higher
-- MySQL _ or higher
-
-#### Getting Started
-
-1. Clone the repository.
-
-    ```shell
-    git clone https://github.com/mitchdotdeveloper/Student-Grade-Table
-    cd Student-Grade-Table
-    ```
-
-1. Install all dependencies with NPM.
-
-    ```shell
-    npm install
-    ```
-
-1. Start the project. Once started you can view the application by opening http://localhost:3000 in your browser.
-
-    ```shell
-    npm run dev
-    ```
