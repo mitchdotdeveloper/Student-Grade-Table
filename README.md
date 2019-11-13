@@ -11,6 +11,7 @@ A full stack JavaScript CMS application for educators that want to manage studen
 - Express.js
 - MySQL
 - HTML5
+- Apache2
 - AWS EC2
 
 ## Live Demo
